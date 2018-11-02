@@ -1,5 +1,5 @@
 name: demo# Name of the Catalog Entry
 description: |
   A Demo App which does almost nothing of any practical value.
-version: 0
+version: 1
 category : Security

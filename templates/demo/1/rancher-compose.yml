@@ -1,0 +1,6 @@
+.catalog:
+  name: "demo"
+  version: "1.1-rancher1"
+  description: "demo is a free and open source solution for recording terminal sessions and sharing them on the web."
+  minimum_rancher_version: v0.46.0
+  questions:
