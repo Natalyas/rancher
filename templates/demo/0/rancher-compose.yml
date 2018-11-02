@@ -1,0 +1,22 @@
+version: '2'
+services:
+  bareos-db:
+    scale: 1
+    start_on_create: true
+  bareos-fd:
+    scale: 1
+    start_on_create: true
+  bareos-webui:
+    scale: 1
+    start_on_create: true
+  smtpd:
+    scale: 1
+    start_on_create: true
+  bareos-sd:
+    scale: 1
+    start_on_create: true
+  bareos-dir:
+    scale: 1
+    start_on_create: true
+
+

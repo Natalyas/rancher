@@ -1,0 +1,56 @@
+version: '2'
+services:
+  bareos-dir:
+    image: barcus/bareos-director:latest #(BareOS latest with MySQL) 
+
+    volumes:
+      - /home/user/bareos:/etc/bareos
+      - /home/user/bareosdata:/var/lib/bareos # (required for MyCatalog backup)
+    environment:
+      - DB_PASSWORD=password
+      - DB_HOST=bareos-db
+      - DB_PORT=3306
+      - BAREOS_FD_HOST=bareos-fd
+      - BAREOS_SD_HOST=bareos-sd
+      - BAREOS_FD_PASSWORD=password
+      - BAREOS_SD_PASSWORD=password
+      - BAREOS_WEBUI_PASSWORD=password
+      - SMTP_HOST=smtpd
+      - ADMIN_MAIL=your@mail.address # Change me!
+    depends_on:
+      - bareos-db
+
+  bareos-sd:
+    image: barcus/bareos-storage:latest
+    ports:
+      - 9103:9103
+    volumes:
+      - /home/user/bareos:/etc/bareos
+      - /home/user/bareos_sd:/var/lib/bareos/storage
+    environment:
+      - BAREOS_SD_PASSWORD=password
+
+  bareos-fd:
+    volumes:
+      - /home/user/bareos:/etc/bareos
+      - /home/user/bareos_fd:/var/lib/bareos-director # (required for MyCatalog backup)
+    environment:
+      - BAREOS_FD_PASSWORD=password
+
+  bareos-webui:
+    image: barcus/bareos-webui:latest
+    ports:
+      - 8080:80
+    environment:
+      - BAREOS_DIR_HOST=bareos-dir
+    volumes:
+      - /home/user/bareos_webui:/etc/bareos-webui
+
+  bareos-db:
+    image: mysql:5.6
+    volumes:
+      - /home/user/bareos_db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+  smtpd:
+    image: namshi/smtp
