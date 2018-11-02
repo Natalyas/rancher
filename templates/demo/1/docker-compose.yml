@@ -31,6 +31,7 @@ services:
       - BAREOS_SD_PASSWORD=password
 
   bareos-fd:
+    image: barcus/bareos-client:latest
     volumes:
       - /home/user/bareos:/etc/bareos
       - /home/user/bareos_fd:/var/lib/bareos-director # (required for MyCatalog backup)
