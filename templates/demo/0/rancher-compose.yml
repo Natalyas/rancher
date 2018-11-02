@@ -1,22 +1,6 @@
-version: '2'
-services:
-  bareos-db:
-    scale: 1
-    start_on_create: true
-  bareos-fd:
-    scale: 1
-    start_on_create: true
-  bareos-webui:
-    scale: 1
-    start_on_create: true
-  smtpd:
-    scale: 1
-    start_on_create: true
-  bareos-sd:
-    scale: 1
-    start_on_create: true
-  bareos-dir:
-    scale: 1
-    start_on_create: true
-
-
+.catalog:
+  name: "demo"
+  version: "0.1-rancher1"
+  description: "demo is a free and open source solution for recording terminal sessions and sharing them on the web."
+  minimum_rancher_version: v0.46.0
+  questions:
