@@ -41,7 +41,7 @@ services:
   bareos-webui:
     image: barcus/bareos-webui:latest
     ports:
-      - 8080:80
+      - 8070:80
     environment:
       - BAREOS_DIR_HOST=bareos-dir
     volumes:
